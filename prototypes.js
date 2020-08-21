@@ -16,6 +16,53 @@
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
 */
 
+//lets say we pasws in the attributes. if we want ot asaccess the specific instance of a game object we have access to it like gameObject.name
+//declare the function
+
+//* PROTOTYPE *//
+// function GameObject(attrs){
+//   this.createdAt = attrs.createdAt;
+//   this.name = attrs.name;
+//   this.dimensions = attrs.dimensions;
+//   this.healthpoints = attrs.healthpoints;
+// }
+//   GameObject.prototype.destroy = function(){
+//     return `${this.name} was removed from the game`
+//   }
+
+//   GameObject.prototype.takeDamage = function(){
+//     return `${this.name} took damage`
+//   }
+
+//*CLASS*//
+
+class GameObject {
+  constructor(attrs){
+    this.createdAt = attrs.createdAt;
+    this.name = attrs.name;
+    this.dimensions = attrs.dimensions;
+    this.healthpoints = attrs.healthpoints;  
+  }
+
+    destroy(){
+      return `${this.name} was removed from the game`
+    }
+
+    takeDamage(){
+      return `${this.name} took damage`
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
   * team
@@ -26,6 +73,37 @@
   * should inherit takeDamage() from GameObject
 */
  
+//PROTOTYPE//
+// function Humanoid(attrs){
+//   GameObject.call(this, attrs)
+//   this.team = attrs.team;
+//   this.weapons = attrs.weapons;
+//   this .language = attrs.language;
+// }
+// //this is how we inherit the methods from the parents prototype constructor.
+// Humanoid.prototype = Object.create(GameObject.prototype)
+
+// Humanoid.greet.greet = function(){
+//   return `${this.name} offers a greeting in ${this.language}`
+// }
+// extends removes the need for object.create which is used to inherrit methods
+
+//CLASS//
+class Humanoid extends GameObject {
+  constructor(attrs){
+    super(attrs)
+    this.team = attrs.team
+    this.weapons = attrs.weapons
+    this.language = attrs.language
+  }
+
+  greet(){
+    return `${this.name} offers a greeting in ${this.language}`
+  }
+}
+
+
+
 /*
   * Inheritance chain: GameObject -> Humanoid
   * Instances of Humanoid should have all of the same properties as GameObject.
@@ -33,7 +111,7 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -91,4 +169,3 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
